@@ -33,8 +33,9 @@ function Drunkard.Walk(self, lifetime:number, iterations:number, StartPos:Vector
 			
 			self.Value[y][x] = true
 		end 
-		
-		table.insert(self.Connectors, {StartPos, Vector2.new(x,y)})
+
+		--TODO: There is a weird bug in which some of the connectors are not being added
+		table.insert(self.Connectors, {StartPos, Vector2.new(x + 1,y + 1)})
 	end
 end
 

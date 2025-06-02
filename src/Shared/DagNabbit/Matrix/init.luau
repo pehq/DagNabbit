@@ -1,4 +1,5 @@
 local CharSet = require(script.Parent.Data.CharSet)
+local DeepCopy = require(script.Parent.Utils.DeepCopy)
 
 local Matrix = {}
 Matrix.__index = Matrix
@@ -92,7 +93,7 @@ end
 
 function Matrix.fromMatrix(matrixVal)
 	local self = setmetatable({}, Matrix)
-	self.Value = table.clone(matrixVal)
+	self.Value = DeepCopy(matrixVal)
 	self.Dimensions = Vector2.new(#matrixVal[1], #matrixVal)
 	self.GridScale = Vector2.new(5,5) 
 	self.Connectors = {}
@@ -208,7 +209,7 @@ function Matrix:Overlay(otherMatrix, offset:Vector2)
 end
 
 --This one works with nil but at the cost of performance
-function Matrix:Mask(otherMatrix:{ [a]: { [b]: c } }, offset:Vector2)
+function Matrix:Mask(otherMatrix, offset:Vector2)
 	if offset == nil then
 		print("setted missing")
 		offset = Vector2.zero

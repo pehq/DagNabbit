@@ -1,3 +1,5 @@
+local deepcopy = require(script.Parent.Parent.Utils.DeepCopy)
+
 local Conway = {}
 
 local Directions = {
@@ -11,16 +13,6 @@ local Directions = {
 	Vector2.new( 1,  1), -- Bottom Right
 }
 
-local function deepcopy(matrix)
-	local copy = {}
-	for y, row in ipairs(matrix) do
-		copy[y] = {}
-		for x, value in ipairs(row) do
-			copy[y][x] = value
-		end
-	end
-	return copy
-end
 
 function Conway.RunWithMatrix(self, steps)
 	local matrix = self.Value
@@ -36,13 +28,13 @@ function Conway.RunWithMatrix(self, steps)
 
 				for _, dir in ipairs(Directions) do
 					local nx, ny = x + dir.X, y + dir.Y
-					if matrix[ny] and matrix[ny][nx] == "#" then
+					if matrix[ny] and matrix[ny][nx] == true then
 						neighbors += 1
 					end
 				end
 
 				local currentChar = matrix[y][x]
-				local nextChar = (neighbors > 5 or neighbors == 0) and "#" or " "
+				local nextChar = (neighbors > 5 or neighbors == 0) and true or false
 				newMatrix[y][x] = nextChar
 			end
 		end

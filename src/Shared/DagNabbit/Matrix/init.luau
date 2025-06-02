@@ -395,7 +395,7 @@ function Matrix:Cull()
 		end
 	end
 	
-	print(Min_X, Min_Y, Max_X, Max_Y)
+	--print(Min_X, Min_Y, Max_X, Max_Y)
 	
 	return self:Extract(Vector2.new(Min_X, Min_Y), Vector2.new(Max_X, Max_Y))
 end

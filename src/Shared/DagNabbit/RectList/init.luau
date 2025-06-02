@@ -104,13 +104,14 @@ function RectList.fromMatrix(Matrix)
 				end
 			end
 
-			print(x, y, Max_X, Max_Y, val)
+			--print(x, y, Max_X, Max_Y, val)
 			self:Insert(Rect.new(x, y, Max_X, Max_Y), val)
 		end
 	end
 	
 	self.Connectors = DeepCopy(Matrix.Connectors or {})
 	self.Scale = Matrix.Scale or self.Scale
+	self:SetScaleAll(self.Scale)
 	return self
 end
 
@@ -120,11 +121,17 @@ function RectList:Insert(RectVal:Rect, val)
 	table.insert(self.List, NewRect)
 end
 
+function RectList:SetScaleAll(scale)
+	for i, v in pairs(self.List) do
+		v.Scale = scale
+	end
+end
+
 function RectList:GenerateList()
 	local Model = Instance.new("Model")
 
 	for i, v in pairs(self.List) do	
-		local GenPart = v:Generate(self.Scale)
+		local GenPart = v:Generate()
 		if GenPart then
 			GenPart.Name = tostring(i)
 			GenPart.Parent = Model

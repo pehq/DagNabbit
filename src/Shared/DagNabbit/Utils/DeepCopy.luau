@@ -1,3 +1,4 @@
+--Copies a bunch of nested tables
 return function(matrix)
 	local copy = {}
 	for y, row in ipairs(matrix) do

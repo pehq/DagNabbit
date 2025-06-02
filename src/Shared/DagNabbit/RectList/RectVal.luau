@@ -2,6 +2,7 @@
 local CharSet = require(script.Parent.Parent.Data.CharSet)
 
 local RectVal = {}
+RectVal.__index =  RectVal
 
 function RectVal.new(rect:Rect, val:any)
     local self = setmetatable({}, RectVal)
@@ -26,21 +27,27 @@ function RectVal:GetMidpoint()
     return Mid
 end
 
-function RectVal:Generate(BlueprintSelected:Folder)
+function RectVal:Generate(Scale:Vector2, BlueprintSelected:Folder)
     if not BlueprintSelected then
-		BlueprintSelected = script.Parent.Blueprint.Default
+		BlueprintSelected = script.Parent.Parent.Blueprint.Default
 	end
-
-    local MidPoint = self:GetMidpoint()
+	
+	if not Scale then
+		Scale = Vector2.one
+	end
+	
+	print(self)
+	local MidPoint = self:GetMidpoint()
+	
     local GeneratedPart:BasePart = nil
-    if self.Value == "Wall" then
+	if CharSet.CharValues[self.Value] == "Wall" then
         GeneratedPart = BlueprintSelected.Wall:Clone()
         GeneratedPart.Size = Vector3.new(self.Rect.Width, 16, self.Rect.Height)
-        GeneratedPart.CFrame = CFrame.new(MidPoint.X, GeneratedPart.Size.Y/2, MidPoint.Y)
-    elseif self.Value == "Floor" then
+        GeneratedPart.CFrame = CFrame.new(MidPoint.X * 2, GeneratedPart.Size.Y/2, MidPoint.Y * 2)
+	elseif CharSet.CharValues[self.Value] == "Floor" then
         GeneratedPart = BlueprintSelected.Floor:Clone()
         GeneratedPart.Size = Vector3.new(self.Rect.Width, 2, self.Rect.Height)
-        GeneratedPart.CFrame = CFrame.new(MidPoint.X, -GeneratedPart.Size.Y/2, MidPoint.Y)
+        GeneratedPart.CFrame = CFrame.new(MidPoint.X * 2, -GeneratedPart.Size.Y/2, MidPoint.Y * 2)
     end
 
     return GeneratedPart

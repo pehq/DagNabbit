@@ -19,8 +19,10 @@ function Walk.Run(self, MaxTunnels, MaxLength, StartPos:Vector2)
 	local LastDir:Vector2 = nil
 	local CurDir:Vector2 = nil
 	local x, y = StartPos.X, StartPos.Y
-	
-	for i = 1, MaxTunnels do
+
+	self.Value[y][x] = true
+
+	for _ = 1, MaxTunnels do
 		--Decide turning direction
 		if CurDir ~= nil then
 			CoinFlip = math.random(1, 2)

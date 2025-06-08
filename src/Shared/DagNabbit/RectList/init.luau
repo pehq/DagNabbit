@@ -1,4 +1,7 @@
-local DeepCopy = require(script.Parent.Utils.DeepCopy)
+local Dag = script.Parent
+
+local DeepCopy = require(Dag.Utils.DeepCopy)
+local RectUtils = require(Dag.Utils.RectUtils)
 local RectValMod = require(script.RectVal)
 
 local RectList = {}
@@ -9,7 +12,7 @@ function RectList.new()
 	
 	self.List = {}
 	self.Connectors = {}
-	self.Scale = Vector2.new(5,5)
+	-- self.Scale = Vector2.new(5,5) --NO
 
 	return self
 end
@@ -21,18 +24,15 @@ function RectList.fromMatrix(Matrix)
 	
 	local ValsChecked = {} --i = (y - 1) * Rows + (x - 1) + 1 (non-simplified version, simplification is encouraged.)
 	
-	local DEBUG = true
 	--TODO: Columns and Rows var are switched... oops...
 	local Columns = Matrix.Dimensions.Y
 	local Rows =  Matrix.Dimensions.X
 	
 	for y = 1, Columns do
 		for x = 1, Rows do
-			print(x, y , ValsChecked[(y - 1) * Rows + x])
 			if ValsChecked[(y - 1) * Rows + x] == true then
 				continue
 			end
-			print(true)
 			
 			local val = Matrix.Value[y][x]
 			
@@ -143,10 +143,6 @@ function RectList.fromMatrix(Matrix)
 			for fillY = y, Max_Y do
 				for fillX = x, Max_X do
 					ValsChecked[(fillY - 1) * Rows + fillX] = true
-					if DEBUG == true and ValsChecked[1 - 1 * Rows + 8] == true then
-						print(fillX, fillY)
-						DEBUG = false
-					end
 				end
 			end
 			
@@ -155,10 +151,12 @@ function RectList.fromMatrix(Matrix)
 			self:Insert(Rect.new(x, y, Max_X, Max_Y), val)
 		end
 	end
-	
+
+	--Now rescale
+	self:Rescale(Matrix.GridScale)
+
 	self.Connectors = DeepCopy(Matrix.Connectors or {})
-	self.Scale = Matrix.GridScale or self.Scale
-	self:SetScaleAll(self.Scale)
+	-- self.Scale = Matrix.GridScale or self.Scale --NO
 	self.Dimensions = Matrix.Dimensions
 	return self
 end
@@ -169,17 +167,79 @@ function RectList:Insert(RectVal:Rect, val)
 	table.insert(self.List, NewRect)
 end
 
-function RectList:SetScaleAll(scale)
-	for i, v in pairs(self.List) do
-		v.Scale = scale
+function RectList:Rescale(scale:Vector2) --TODO: there's a problem here
+	for i = 1, #self.List do
+		local curRectVal = self.List[i]
+		
+		curRectVal.Rect = Rect.new(curRectVal.Rect.Min, Vector2.new((curRectVal.Rect.Width + 1) * scale.X, (curRectVal.Rect.Height + 1) * scale.Y))
 	end
 end
 
-function RectList:GenerateList()
+function RectList:GetOverlapping(r:Rect)
+	local AffectedRects = {}
+	for i = 1, #self.List do
+		local curRect:{Rect:Rect, Value:any} = self.List[i]
+		if RectUtils.Touching(curRect, r) then
+			AffectedRects[i] = curRect
+		end
+	end
+	
+	return AffectedRects
+end
+
+function RectList:Cut(r:Rect)
+	local AffectedRects = self:GetOverlapping(r) --Tables are anonymous, these are the direct values.
+		
+	for i, v in pairs(AffectedRects) do
+		local a:Rect = v.Rect
+		
+		if RectUtils.Covering(r, a) then
+			self.List[i] = nil
+			continue
+		end
+		-- Original rect bounds
+		local x1, y1 = a.x, a.y
+		local x2, y2 = a.x + a.w, a.y + a.h
+		
+		-- Negator bounds
+		local nx1, ny1 = r.x, r.y
+		local nx2, ny2 = r.x + r.w, r.y + r.h
+		
+		-- Intersection bounds
+		local ix1 = math.max(x1, nx1)
+		local iy1 = math.max(y1, ny1)
+		local ix2 = math.min(x2, nx2)
+		local iy2 = math.min(y2, ny2)
+		
+		-- Top slice
+		if y1 < iy1 then
+			self:Insert(Rect.new(x1, y1, a.Width, iy1 - y1), v.Value)
+		end
+		
+		--Bottom Slice
+		if iy2 < y2 then
+			self:Insert(Rect.new(x1, iy2, a.Width, y2 - iy2), v.Value)
+		end
+		
+		--Left slice
+		if x1 < ix1 then
+			self:Insert(Rect.new(x1, iy1, ix1 - x1, iy2 - iy1), v.Value)
+		end
+
+		--Right Slice
+		if ix2 < x2 then
+			self:Insert(Rect.new(ix2, iy1, x2 - ix2, iy2 - iy1), v.Value)
+		end
+		
+		self.List[i] = nil
+	end
+end
+
+function RectList:GenerateList(BlueprintSelected)
 	local Model = Instance.new("Model")
 
 	for i, v in pairs(self.List) do	
-		local GenPart = v:Generate()
+		local GenPart = v:Generate(BlueprintSelected)
 		if GenPart then
 			GenPart.Name = tostring(i)
 			GenPart.Parent = Model

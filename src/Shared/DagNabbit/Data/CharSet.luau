@@ -4,7 +4,8 @@ CharSet.CharValues = { --TODO: maybe have a reversed version?
 	[0] = "Air",
 	["_"] = "Floor",
 	["#"] = "Wall",
-	[false] = false
+	["H"] = "Ladder",
+	[false] = false,
 } --This is used for quick translation of letters to numbers.
 
 table.freeze(CharSet.CharValues)

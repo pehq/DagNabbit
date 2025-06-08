@@ -1,5 +1,8 @@
 --This module allows values to be assigned to rects
-local CharSet = require(script.Parent.Parent.Data.CharSet)
+local Dag = script:FindFirstAncestor("DagNabbit")
+
+local CharSet = require(Dag.Data.CharSet)
+
 
 local RectVal = {}
 RectVal.__index =  RectVal
@@ -9,7 +12,6 @@ function RectVal.new(rect:Rect, val:any)
 
     self.Rect = rect
 	self.Value = val
-	self.Scale = Vector2.one * 5
 
     return self
 end
@@ -28,23 +30,17 @@ function RectVal:GetMidpoint()
     return Mid
 end
 
-function RectVal:Generate(BlueprintSelected:Folder)
+function RectVal:Generate(BlueprintSelected)
     if not BlueprintSelected then
-		BlueprintSelected = script.Parent.Parent.Blueprint.Default
+		BlueprintSelected = Dag.Blueprint.Default
 	end
 	
-	local MidPoint = self:GetMidpoint()
 	
-    local GeneratedPart:BasePart = nil
-	if CharSet.CharValues[self.Value] == "Wall" then
-        GeneratedPart = BlueprintSelected.Wall:Clone()
-		GeneratedPart.Size = Vector3.new((self.Rect.Width + 1) * self.Scale.X, 16, (self.Rect.Height + 1) * self.Scale.Y)
-		GeneratedPart.CFrame = CFrame.new(MidPoint.X * self.Scale.X, GeneratedPart.Size.Y/2, MidPoint.Y * self.Scale.Y)
-	elseif CharSet.CharValues[self.Value] == "Floor" then
-        GeneratedPart = BlueprintSelected.Floor:Clone()
-        GeneratedPart.Size = Vector3.new((self.Rect.Width + 1) * self.Scale.X, 2, (self.Rect.Height + 1) * self.Scale.Y)
-        GeneratedPart.CFrame = CFrame.new(MidPoint.X * self.Scale.X, -GeneratedPart.Size.Y/2, MidPoint.Y * self.Scale.Y)
-    end
+	print(self)
+	
+	local Blueprint = require(BlueprintSelected)
+	local GeneratedPart:BasePart = Blueprint.GenerateRectVal(self)
+	
 
     return GeneratedPart
 end

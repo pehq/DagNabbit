@@ -1,5 +1,7 @@
-local CharSet = require(script.Parent.Data.CharSet)
-local DeepCopy = require(script.Parent.Utils.DeepCopy)
+local Dag = script:FindFirstAncestor("DagNabbit")
+
+local CharSet = require(Dag.Data.CharSet)
+local DeepCopy = require(Dag.Utils.DeepCopy)
 
 local Matrix = {}
 Matrix.__index = Matrix
@@ -421,6 +423,30 @@ function Matrix:ShowConnectors(StartChar, EndChar)
 	end
 end
 
+function Matrix:SetStartingConnectors(val)
+	if not val then
+		return
+	end
+	
+	for i = 1, #self.Connectors do
+		local CurConnector = self.Connectors[i]
+		
+		self.Value[CurConnector[1].Y][CurConnector[1].X] = val
+	end
+end
+
+function Matrix:SetEndingConnectors(val)
+	if not val then
+		return
+	end
+	
+	for i = 1, #self.Connectors do
+		local CurConnector = self.Connectors[i]
+		
+		self.Value[CurConnector[2].Y][CurConnector[2].X] = val
+	end
+end
+
 function Matrix:GetFarthestConnectorIndex()
 	local Farthest = 1
 	local FarMagnitude = 0
@@ -500,59 +526,16 @@ function Matrix:Print()
 end
 
 --While this function may appear to be useful, DO NOT USE IN PRODUCTION. It takes a long time to load and causes lag! For that reason, it's only meant to be used as a way to debug stuff.
-function Matrix:Generate(BlueprintSelected:Folder)
+function Matrix:Generate(BlueprintSelected:ModuleScript)
 	if not BlueprintSelected then
-		BlueprintSelected = script.Parent.Blueprint.Default
+		BlueprintSelected = Dag.Blueprint.Default
 	end
 	
-	local Model = Instance.new("Model")
+	local Model = nil
+	Model = require(BlueprintSelected).GenerateMatrix(self)
 	Model.Name = "GeneratedMatrix"
 	
-	local Scale:Vector2 = self.GridScale --defaults to 25
-	
-	for y = 1, #self.Value do
-		for x = 1, #self.Value[y] do
-			local val = self.Value[y][x]
-			if not val then
-				continue
-			end
-			local CharVal = CharSet.CharValues[val]			
-			if CharVal == "Wall" then
-				local Part = BlueprintSelected.Wall:Clone()
-				
-				Part.Size = Vector3.new(Scale.X, (16) / 2, Scale.Y)
-				Part.CFrame = CFrame.new(x * Scale.X, Part.Size.Y / 2, y * Scale.Y)
-				Part.Name =  `{x} {y}`
-				
-				Part.Parent = Model
-			elseif CharVal == "Floor" then
-				local Part = BlueprintSelected.Floor:Clone()
-				
-				Part.Size = Vector3.new(Scale.X, 2, Scale.Y)
-				Part.CFrame = CFrame.new(x * Scale.X, -Part.Size.Y / 2, y * Scale.Y)
-				Part.Name = `{x} {y}`
-				
-				Part.Parent = Model
-			else
-				continue
-			end
-		end
-	end
-	
-	for _, v:{[number]:Vector2} in pairs(self.Connectors) do
-		local Target:BasePart = nil
-		Target = Model:FindFirstChild(`{v[1].X} {v[1].Y}`)
-		if Target then
-			Target.BrickColor = BrickColor.Green()
-			Target.Material = Enum.Material.Neon
-		end
-		
-		Target = Model:FindFirstChild(`{v[2].X} {v[2].Y}`)
-		if Target then
-			Target.BrickColor = BrickColor.Red()
-			Target.Material = Enum.Material.Neon
-		end
-	end
+	local Scale:Vector2 = self.GridScale --defaults to (5,5)
 	
 	return Model
 end

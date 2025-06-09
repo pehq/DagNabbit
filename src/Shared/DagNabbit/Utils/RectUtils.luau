@@ -29,7 +29,6 @@ end
 
 --Check if rect a is covering rect b
 function RectUtils.Covering(a:Rect, b:Rect)
-	print(a, b)
 	if a.Min.X <= b.Min.X and a.Min.Y <= b.Min.Y and a.Max.X >= b.Max.X and a.Max.Y >= b.Max.Y then
 		return true
 	end

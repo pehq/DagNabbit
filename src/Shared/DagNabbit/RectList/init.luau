@@ -13,7 +13,8 @@ function RectList.new()
 	self.List = {}
 	self.Connectors = {}
 	-- self.Scale = Vector2.new(5,5) --NO
-
+	self.Dimensions = Vector2.new(0,0)
+	
 	return self
 end
 
@@ -148,7 +149,7 @@ function RectList.fromMatrix(Matrix)
 			
 
 			--print(x, y, Max_X, Max_Y, val)
-			self:Insert(Rect.new(x, y, Max_X, Max_Y), val)
+			self:Insert(Rect.new(x - 1, y - 1, Max_X, Max_Y), val)
 		end
 	end
 
@@ -167,72 +168,131 @@ function RectList:Insert(RectVal:Rect, val)
 	table.insert(self.List, NewRect)
 end
 
-function RectList:Rescale(scale:Vector2) --TODO: there's a problem here
+function RectList:Rescale(scale: Vector2)
 	for i = 1, #self.List do
-		local curRectVal = self.List[i]
-		
-		curRectVal.Rect = Rect.new(curRectVal.Rect.Min, Vector2.new((curRectVal.Rect.Width + 1) * scale.X, (curRectVal.Rect.Height + 1) * scale.Y))
+		local rect = self.List[i].Rect
+
+		local min = Vector2.new(
+			rect.Min.X * scale.X,
+			rect.Min.Y * scale.Y
+		)
+
+		local max = Vector2.new(
+			rect.Max.X * scale.X,
+			rect.Max.Y * scale.Y
+		)
+
+		self.List[i].Rect = Rect.new(min, max)
 	end
+	
+	self.Dimensions = Vector2.new(self.Dimensions.X * scale.X, self.Dimensions.Y * scale.Y)
 end
 
 function RectList:GetOverlapping(r:Rect)
 	local AffectedRects = {}
-	for i = 1, #self.List do
-		local curRect:{Rect:Rect, Value:any} = self.List[i]
-		if RectUtils.Touching(curRect, r) then
-			AffectedRects[i] = curRect
+	for i, v in pairs(self.List) do
+		if RectUtils.Touching(v.Rect, r) then
+			AffectedRects[i] = v
 		end
 	end
 	
 	return AffectedRects
 end
 
-function RectList:Cut(r:Rect)
+--look up "computational geometry rectangle subtraction algorithm"
+--Naming scheme is based on GCP https://en.wikipedia.org/wiki/General_Polygon_Clipper
+function RectList:Difference(r:Rect)
 	local AffectedRects = self:GetOverlapping(r) --Tables are anonymous, these are the direct values.
-		
+	print(AffectedRects)
+	
+	local IndexesToRemove = {}
+	
 	for i, v in pairs(AffectedRects) do
 		local a:Rect = v.Rect
 		
 		if RectUtils.Covering(r, a) then
-			self.List[i] = nil
+			table.insert(IndexesToRemove, i)
 			continue
 		end
-		-- Original rect bounds
-		local x1, y1 = a.x, a.y
-		local x2, y2 = a.x + a.w, a.y + a.h
 		
-		-- Negator bounds
-		local nx1, ny1 = r.x, r.y
-		local nx2, ny2 = r.x + r.w, r.y + r.h
+		--Answer comes from here
+		--https://stackoverflow.com/questions/16619835/clipping-a-rectangle-in-javascript
+		local Rectangles = {}
 		
-		-- Intersection bounds
-		local ix1 = math.max(x1, nx1)
-		local iy1 = math.max(y1, ny1)
-		local ix2 = math.min(x2, nx2)
-		local iy2 = math.min(y2, ny2)
-		
-		-- Top slice
-		if y1 < iy1 then
-			self:Insert(Rect.new(x1, y1, a.Width, iy1 - y1), v.Value)
+		--Top
+		if a.Min.Y < r.Min.Y then
+			table.insert(Rectangles, Rect.new(
+				a.Min.X,
+				a.Min.Y,
+				a.Max.X,
+				r.Min.Y
+			))
 		end
 		
-		--Bottom Slice
-		if iy2 < y2 then
-			self:Insert(Rect.new(x1, iy2, a.Width, y2 - iy2), v.Value)
+		--Bottom
+		if a.Max.Y > r.Max.Y then
+			table.insert(Rectangles, Rect.new(
+				a.Min.X,
+				r.Max.Y,
+				a.Max.X,
+				a.Max.Y
+			))
+		end	
+		
+		--Left
+		if a.Min.X < r.Min.X then
+			table.insert(Rectangles, Rect.new(
+				a.Min.X,
+				math.max(a.Min.Y, r.Min.Y),
+				r.Min.X,
+				math.min(a.Max.Y, r.Max.Y)
+			))
 		end
 		
-		--Left slice
-		if x1 < ix1 then
-			self:Insert(Rect.new(x1, iy1, ix1 - x1, iy2 - iy1), v.Value)
-		end
-
-		--Right Slice
-		if ix2 < x2 then
-			self:Insert(Rect.new(ix2, iy1, x2 - ix2, iy2 - iy1), v.Value)
+		--Right
+		if a.Max.X > r.Max.X then
+			table.insert(Rectangles, Rect.new(
+				r.Max.X,
+				math.max(a.Min.Y, r.Min.Y),
+				a.Max.X,
+				math.min(a.Max.Y, r.Max.Y)
+			))
 		end
 		
+		for _, j in ipairs(Rectangles) do
+			self:Insert(j, v.Value)
+		end
+		
+		table.insert(IndexesToRemove, i)
+	end
+	
+	warn(r)
+	
+	for _, i in ipairs(IndexesToRemove) do
 		self.List[i] = nil
 	end
+	
+	for i, v in pairs(self.List) do
+		if v == nil then
+			table.remove(i)
+		end
+	end
+end
+
+function RectList:GetRandomRectFromVal(val)
+	local AllRectsWithVal = {}
+	
+	for i, v in ipairs(self.List) do
+		if v.Value == val then
+			table.insert(AllRectsWithVal, v)
+		end
+	end	
+	
+	if #AllRectsWithVal == 0 then
+		return 
+	end
+	
+	return AllRectsWithVal[math.random(1, #AllRectsWithVal)]
 end
 
 function RectList:GenerateList(BlueprintSelected)

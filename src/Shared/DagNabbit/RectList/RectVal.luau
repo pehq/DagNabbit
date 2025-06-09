@@ -35,13 +35,9 @@ function RectVal:Generate(BlueprintSelected)
 		BlueprintSelected = Dag.Blueprint.Default
 	end
 	
-	
-	print(self)
-	
 	local Blueprint = require(BlueprintSelected)
 	local GeneratedPart:BasePart = Blueprint.GenerateRectVal(self)
 	
-
     return GeneratedPart
 end
 

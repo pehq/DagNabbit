@@ -16,7 +16,7 @@ function Blueprint.Wall(Pos:Vector2, Scale:Vector2)
 	local Part = DefaultParts.Floor:Clone()
 
 	Part.Size = Vector3.new(Scale.X, 2, Scale.Y)
-	Part.CFrame = CFrame.new(Pos.X * Scale.X, -Part.Size.Y / 2, Pos.Y * Scale.Y)
+	Part.CFrame = CFrame.new(Pos.X, -Part.Size.Y / 2, Pos.Y)
 	Part.Name = `{Pos.X} {Pos.Y}`
 
 	return Part
@@ -26,7 +26,7 @@ function Blueprint.Floor(Pos, Scale)
 	local Part = DefaultParts.Wall:Clone()
 
 	Part.Size = Vector3.new(Scale.X, 16, Scale.Y)
-	Part.CFrame = CFrame.new(Pos.X * Scale.X, Part.Size.Y / 2, Pos.Y * Scale.Y)
+	Part.CFrame = CFrame.new(Pos.X, Part.Size.Y / 2, Pos.Y)
 	Part.Name = `{Pos.X} {Pos.Y}`
 
 	return Part
@@ -79,7 +79,7 @@ function Blueprint.GenerateRectVal(self:{Rect:Rect, Value:any?}) --TODO: issue w
 	end
 	
 	local pos = self:GetMidpoint()
-	local scale = Vector2.new((self.Rect.Width + 1), (self.Rect.Height + 1))
+	local scale = Vector2.new(self.Rect.Width, self.Rect.Height)
 	
 	local Part = nil
 	

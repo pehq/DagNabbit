@@ -16,6 +16,9 @@
 # Misc
 .DS_Store
 
+#documentation
+/build
+
 # Assets
 /images
 /Builds

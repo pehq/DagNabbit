@@ -1,3 +1,9 @@
+--[=[
+	@class RectList
+
+	This is my first class.
+]=]
+
 local Dag = script.Parent
 
 local DeepCopy = require(Dag.Utils.DeepCopy)

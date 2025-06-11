@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[356],{2374:s=>{s.exports=JSON.parse('{"functions":[],"properties":[],"types":[],"name":"RectList","desc":"This is my first class.","source":{"line":6,"path":"src/Shared/DagNabbit/RectList/init.luau"}}')}}]);

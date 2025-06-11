@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="plugin-moonwave plugin-id-moonwave" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.7.0">
+<title data-rh="true">Matrix | DagNabbit</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://pehq.github.io/DagNabbit/api/Matrix"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Matrix | DagNabbit"><meta data-rh="true" name="description" content="A grid of values"><meta data-rh="true" property="og:description" content="A grid of values"><link data-rh="true" rel="canonical" href="https://pehq.github.io/DagNabbit/api/Matrix"><link data-rh="true" rel="alternate" href="https://pehq.github.io/DagNabbit/api/Matrix" hreflang="en"><link data-rh="true" rel="alternate" href="https://pehq.github.io/DagNabbit/api/Matrix" hreflang="x-default"><link rel="stylesheet" href="/DagNabbit/assets/css/styles.7a4bdbad.css">
+<script src="/DagNabbit/assets/js/runtime~main.e0a9c87a.js" defer="defer"></script>
+<script src="/DagNabbit/assets/js/main.250e357e.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();null!==e?t(e):window.matchMedia("(prefers-color-scheme: dark)").matches?t("dark"):(window.matchMedia("(prefers-color-scheme: light)").matches,t("light"))}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/DagNabbit/"><b class="navbar__title text--truncate">DagNabbit</b></a><a class="navbar__item navbar__link" href="/DagNabbit/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/DagNabbit/api/">API</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/pehq/DagNabbit" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search"><span aria-label="expand searchbar" role="button" class="search-icon" tabindex="0"></span><input id="search_input_react" type="search" placeholder="Loading..." aria-label="Search" class="navbar__search-input search-bar" disabled=""></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0 docPageContainer_wNNk"><div class="docPage_Dpn1"><div class="docSidebarContainer_o_re"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/DagNabbit/api/Matrix">​Matrix</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/DagNabbit/api/RectList">​Rect​List</a></li></ul></nav></div></div><main class="docMainContainer_HJE1"><div class="container padding-vert--lg"><div class="row"><div class="col docItemCol_MU3C"><div class="docItemContainer_Wv98"><article><div class="member_J0w1 markdown"><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_oUs_"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><header><h1 class="docTitle_mZRt" style="text-decoration:none"><span style="display:inline-block">Matrix</span></h1><div class="luaClassTags_EipM"></div><div>
+<p>A grid of values</p>
+</div></header><h2 class="anchor anchorWithStickyNavbar_LWe7" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions">​</a></h2><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="new"><code style="text-decoration:none">new</code><a href="#new" class="hash-link" aria-label="Direct link to new" title="Direct link to new">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L90"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->.</code><code class="green_DgR4">new</code><code>(</code><div class="inset_uKQm"><div><code>...<!-- -->: </code><code class="blue_P4bS">number</code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2int16" target="_blank" rel="noopener noreferrer">Vector2int16<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3" target="_blank" rel="noopener noreferrer">Vector3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector3int16" target="_blank" rel="noopener noreferrer">Vector3int16<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code class="op_lSLc"> | </code><code class="blue_P4bS">table</code><code class="op_lSLc"> | </code><code class="blue_P4bS">boolean</code><span class="inlineDescription_G7Er">-- <span>
+<p>you get the idea</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Returns the Matrix class</p>
+</span></span></div><div>
+<p>Creates the Matrix value with the size in x, and y</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="fromMatrix"><code style="text-decoration:none">fromMatrix</code><a href="#fromMatrix" class="hash-link" aria-label="Direct link to fromMatrix" title="Direct link to fromMatrix">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L114"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->.</code><code class="green_DgR4">fromMatrix</code><code>(</code><div class="inset_uKQm"><div><code>matrixVal<!-- -->: </code><code class="purple_ieR2">{</code><code class="green_DgR4">{</code><code class="blue_P4bS">any</code><code class="green_DgR4">}</code><code class="purple_ieR2">}</code><span class="inlineDescription_G7Er">-- <span>
+<p>the matrix Value</p>
+</span></span></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Returns the Matrix class</p>
+</span></span></div><div>
+<p>Creates the Matrix value with a raw matrix value.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetAll"><code style="text-decoration:none">SetAll</code><a href="#SetAll" class="hash-link" aria-label="Direct link to SetAll" title="Direct link to SetAll">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L129"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetAll</code><code>(</code><code>val<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Set all the values in the Matrix to one value. Useful for setting up a Matrix.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="RectSet"><code style="text-decoration:none">RectSet</code><a href="#RectSet" class="hash-link" aria-label="Direct link to RectSet" title="Direct link to RectSet">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L142"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">RectSet</code><code>(</code><div class="inset_uKQm"><div><code>rectVal<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Rect" target="_blank" rel="noopener noreferrer">Rect<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>val<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets a certain area based on a Rect to a value</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetByChar"><code style="text-decoration:none">SetByChar</code><a href="#SetByChar" class="hash-link" aria-label="Direct link to SetByChar" title="Direct link to SetByChar">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L153"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetByChar</code><code>(</code><div class="inset_uKQm"><div><code>Char<!-- -->: </code><code class="blue_P4bS">any</code><code>,</code></div><div><code>val<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets all of a certain value contained in the Matrix to another Value, useful for setting booleans into characters.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetByObject"><code style="text-decoration:none">SetByObject</code><a href="#SetByObject" class="hash-link" aria-label="Direct link to SetByObject" title="Direct link to SetByObject">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L167"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetByObject</code><code>(</code><div class="inset_uKQm"><div><code>str<!-- -->: </code><code class="blue_P4bS">string</code><code>,</code></div><div><code>val<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets all of a certain value contained in the Matrix to another Value <strong>based on the charset</strong>, useful for converting certain characters into another character.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetRandomBool"><code style="text-decoration:none">SetRandomBool</code><a href="#SetRandomBool" class="hash-link" aria-label="Direct link to SetRandomBool" title="Direct link to SetRandomBool">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L181"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetRandomBool</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets all of the Matrix's values to either true or false.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetMultipleChars"><code style="text-decoration:none">SetMultipleChars</code><a href="#SetMultipleChars" class="hash-link" aria-label="Direct link to SetMultipleChars" title="Direct link to SetMultipleChars">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L192"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetMultipleChars</code><code>(</code><div class="inset_uKQm"><div><code>chars<!-- -->: </code><code class="blue_P4bS">any</code><code>,</code></div><div><code>val<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Sets all of a certain value contained in the Matrix to another Value, useful for setting booleans into characters.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="GetNumOfChars"><code style="text-decoration:none">GetNumOfChars</code><a href="#GetNumOfChars" class="hash-link" aria-label="Direct link to GetNumOfChars" title="Direct link to GetNumOfChars">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L209"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">GetNumOfChars</code><code>(</code><code>val<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>returns the number of times a value is used within the Matrix.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="AddOn"><code style="text-decoration:none">AddOn</code><a href="#AddOn" class="hash-link" aria-label="Direct link to AddOn" title="Direct link to AddOn">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L229"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">AddOn</code><code>(</code><div class="inset_uKQm"><div><code>otherMatrix<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Offsetted from the top left of the Matrix</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Adds a matrix over another matrix. <strong>Anything that's a false value won't be overlaid over the base matrix.</strong> If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won't be counted. Can be offsetted from the top-left with offset.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Overlay"><code style="text-decoration:none">Overlay</code><a href="#Overlay" class="hash-link" aria-label="Direct link to Overlay" title="Direct link to Overlay">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L252"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Overlay</code><code>(</code><div class="inset_uKQm"><div><code>otherMatrix<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Offsetted from the top left of the Matrix</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Adds a matrix over another matrix. If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won't be counted. Can be offsetted from the top-left with offset.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Mask"><code style="text-decoration:none">Mask</code><a href="#Mask" class="hash-link" aria-label="Direct link to Mask" title="Direct link to Mask">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L274"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Mask</code><code>(</code><div class="inset_uKQm"><div><code>otherMatrix<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code><code>,</code></div><div><code>offset<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><span class="inlineDescription_G7Er">-- <span>
+<p>Offsetted from the top left of the Matrix</p>
+</span></span></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Adds a matrix over another matrix. Will overlay nil values but at the cost of performance. If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won't be counted. Can be offsetted from the top-left with offset.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Extract"><code style="text-decoration:none">Extract</code><a href="#Extract" class="hash-link" aria-label="Direct link to Extract" title="Direct link to Extract">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L295"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Extract</code><code>(</code><div class="inset_uKQm"><div><code>p1<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>p2<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div></div><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code></div><div>
+<p>Extracts a Matrix from one point to another, creating another Matrix.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="FlipHorizontally"><code style="text-decoration:none">FlipHorizontally</code><a href="#FlipHorizontally" class="hash-link" aria-label="Direct link to FlipHorizontally" title="Direct link to FlipHorizontally">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L332"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">FlipHorizontally</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>lips the values in the Matrix on the x-axis.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="FlipVertically"><code style="text-decoration:none">FlipVertically</code><a href="#FlipVertically" class="hash-link" aria-label="Direct link to FlipVertically" title="Direct link to FlipVertically">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L352"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">FlipVertically</code><code>(</code><code>)  → </code><code>(</code><code>)</code></div><div>
+<p>lips the values in the Matrix on the y-axis.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Rotate90Clockwise"><code style="text-decoration:none">Rotate90Clockwise</code><a href="#Rotate90Clockwise" class="hash-link" aria-label="Direct link to Rotate90Clockwise" title="Direct link to Rotate90Clockwise">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L368"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Rotate90Clockwise</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>lips the values in the Matrix 90 degrees clockwise.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Rotate180"><code style="text-decoration:none">Rotate180</code><a href="#Rotate180" class="hash-link" aria-label="Direct link to Rotate180" title="Direct link to Rotate180">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L393"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Rotate180</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>lips the values in the Matrix upside down.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Rotate90CounterClockwise"><code style="text-decoration:none">Rotate90CounterClockwise</code><a href="#Rotate90CounterClockwise" class="hash-link" aria-label="Direct link to Rotate90CounterClockwise" title="Direct link to Rotate90CounterClockwise">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L399"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Rotate90CounterClockwise</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>lips the values in the Matrix 90 degrees counter-clockwise.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Invert"><code style="text-decoration:none">Invert</code><a href="#Invert" class="hash-link" aria-label="Direct link to Invert" title="Direct link to Invert">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L405"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Invert</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>nverts all booleans contained within the Matrix.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="FlipNeighbors"><code style="text-decoration:none">FlipNeighbors</code><a href="#FlipNeighbors" class="hash-link" aria-label="Direct link to FlipNeighbors" title="Direct link to FlipNeighbors">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L417"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">FlipNeighbors</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ill change all false values that are next to a true value into true.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Cull"><code style="text-decoration:none">Cull</code><a href="#Cull" class="hash-link" aria-label="Direct link to Cull" title="Direct link to Cull">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L446"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Cull</code><code>(</code><code>) → </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="/DagNabbit/api/Matrix">Matrix</a></code></div><div>
+<p>Zooms in on areas that use a true value, useful for optimization.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="InsertConnector"><code style="text-decoration:none">InsertConnector</code><a href="#InsertConnector" class="hash-link" aria-label="Direct link to InsertConnector" title="Direct link to InsertConnector">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L486"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">InsertConnector</code><code>(</code><div class="inset_uKQm"><div><code>p1<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>,</code></div><div><code>p2<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Inserts a Connector</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="ShowConnectors"><code style="text-decoration:none">ShowConnectors</code><a href="#ShowConnectors" class="hash-link" aria-label="Direct link to ShowConnectors" title="Direct link to ShowConnectors">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L495"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">ShowConnectors</code><code>(</code><div class="inset_uKQm"><div><code>StartChar<!-- -->: </code><code class="blue_P4bS">any</code><code>,</code></div><div><code>EndChar<!-- -->: </code><code class="blue_P4bS">any</code></div></div><code>) → </code><code>(</code><code>)</code></div><div>
+<p>Change the values in the Matrix to that of the starting and ending connectors, will default to "S" and "E" respectively if no values for them are provided</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetStartingConnectors"><code style="text-decoration:none">SetStartingConnectors</code><a href="#SetStartingConnectors" class="hash-link" aria-label="Direct link to SetStartingConnectors" title="Direct link to SetStartingConnectors">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L512"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetStartingConnectors</code><code>(</code><code>val<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ets all starting connectors to one Vector2</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetEndingConnectors"><code style="text-decoration:none">SetEndingConnectors</code><a href="#SetEndingConnectors" class="hash-link" aria-label="Direct link to SetEndingConnectors" title="Direct link to SetEndingConnectors">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L525"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetEndingConnectors</code><code>(</code><code>val<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/datatype/Vector2" target="_blank" rel="noopener noreferrer">Vector2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ets all ending connectors to one Vector2</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="GetFarthestConnectorIndex"><code style="text-decoration:none">GetFarthestConnectorIndex</code><a href="#GetFarthestConnectorIndex" class="hash-link" aria-label="Direct link to GetFarthestConnectorIndex" title="Direct link to GetFarthestConnectorIndex">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L541"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">GetFarthestConnectorIndex</code><code>(</code><code>) → </code><code class="blue_P4bS">number</code></div><div>
+<p>Gets the Connector that has the highest magnitude.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Border"><code style="text-decoration:none">Border</code><a href="#Border" class="hash-link" aria-label="Direct link to Border" title="Direct link to Border">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L561"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Border</code><code>(</code><code>borderChar<!-- -->: </code><code class="blue_P4bS">any</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ill surround the Matrix with a value</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Wallify"><code style="text-decoration:none">Wallify</code><a href="#Wallify" class="hash-link" aria-label="Direct link to Wallify" title="Direct link to Wallify">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L578"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Wallify</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ery niche but surrounds all Floor characters with a Wall character.</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="SetRandomChar"><code style="text-decoration:none">SetRandomChar</code><a href="#SetRandomChar" class="hash-link" aria-label="Direct link to SetRandomChar" title="Direct link to SetRandomChar">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L602"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">SetRandomChar</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>ets all values to a random character from the Charset</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Print"><code style="text-decoration:none">Print</code><a href="#Print" class="hash-link" aria-label="Direct link to Print" title="Direct link to Print">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L617"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Print</code><code>(</code><code>) → </code><code>(</code><code>)</code></div><div>
+<p>eatly prints the Matrix in the terminal, will only work if all values are strings or numbers</p>
+</div><div class="divider_rE5g"></div><h3 class="anchor anchorWithStickyNavbar_LWe7" id="Generate"><code style="text-decoration:none">Generate</code><a href="#Generate" class="hash-link" aria-label="Direct link to Generate" title="Direct link to Generate">​</a></h3><div class="repositoryDetailsContainer_BPdw"><a class="sourceButton_sEho" href="https://github.com/pehq/DagNabbit/blob/master/src/Shared/DagNabbit/Matrix/init.luau#L624"><div class="sourceButtonText_Vh0m">&lt;/&gt;</div></a></div><div class="memberString_GwaU"><code>Matrix<!-- -->:</code><code class="green_DgR4">Generate</code><code>(</code><code>BlueprintSelected<!-- -->: </code><code class="blue_P4bS"><a style="text-decoration:underline;color:inherit" href="https://developer.roblox.com/en-us/api-reference/class/ModuleScript" target="_blank" rel="noopener noreferrer">ModuleScript<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" style="color:gray;vertical-align:middle;margin-left:2px"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></code><code>) →  </code><code>(</code><code>)</code></div><div>
+<p>hile this function may appear to be useful, DO NOT USE IN PRODUCTION. It takes a long time to load and causes lag! For that reason, it's only meant to be used as a way to debug stuff.</p>
+</div></div></article></div><details><summary>Show raw api</summary><pre style="max-width:100%;white-space:pre-wrap">{
+    &quot;functions&quot;: [
+        {
+            &quot;name&quot;: &quot;new&quot;,
+            &quot;desc&quot;: &quot;Creates the Matrix value with the size in x, and y&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;...&quot;,
+                    &quot;desc&quot;: &quot;you get the idea&quot;,
+                    &quot;lua_type&quot;: &quot;number|Vector2|Vector2int16|Vector3|Vector3int16|table|boolean&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;Returns the Matrix class&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 90,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;fromMatrix&quot;,
+            &quot;desc&quot;: &quot;Creates the Matrix value with a raw matrix value.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;matrixVal&quot;,
+                    &quot;desc&quot;: &quot;the matrix Value&quot;,
+                    &quot;lua_type&quot;: &quot;{{any}}&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;Returns the Matrix class&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;static&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 114,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetAll&quot;,
+            &quot;desc&quot;: &quot;Set all the values in the Matrix to one value. Useful for setting up a Matrix.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 129,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;RectSet&quot;,
+            &quot;desc&quot;: &quot;Sets a certain area based on a Rect to a value&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;rectVal&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Rect&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 142,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetByChar&quot;,
+            &quot;desc&quot;: &quot;Sets all of a certain value contained in the Matrix to another Value, useful for setting booleans into characters.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;Char&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 153,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetByObject&quot;,
+            &quot;desc&quot;: &quot;Sets all of a certain value contained in the Matrix to another Value **based on the charset**, useful for converting certain characters into another character.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;str&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;string&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 167,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetRandomBool&quot;,
+            &quot;desc&quot;: &quot;Sets all of the Matrix&#x27;s values to either true or false.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 181,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetMultipleChars&quot;,
+            &quot;desc&quot;: &quot;Sets all of a certain value contained in the Matrix to another Value, useful for setting booleans into characters.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;chars&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 192,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;GetNumOfChars&quot;,
+            &quot;desc&quot;: &quot;returns the number of times a value is used within the Matrix.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 209,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;AddOn&quot;,
+            &quot;desc&quot;: &quot;Adds a matrix over another matrix. __Anything that&#x27;s a false value won&#x27;t be overlaid over the base matrix.__ If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won&#x27;t be counted. Can be offsetted from the top-left with offset.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;otherMatrix&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;Offsetted from the top left of the Matrix&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 229,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Overlay&quot;,
+            &quot;desc&quot;: &quot;Adds a matrix over another matrix. If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won&#x27;t be counted. Can be offsetted from the top-left with offset.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;otherMatrix&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;Offsetted from the top left of the Matrix&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 252,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Mask&quot;,
+            &quot;desc&quot;: &quot;Adds a matrix over another matrix. Will overlay nil values but at the cost of performance. If the other matrix being added onto the base matrix goes out of bounds then the out of bounds won&#x27;t be counted. Can be offsetted from the top-left with offset.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;otherMatrix&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;offset&quot;,
+                    &quot;desc&quot;: &quot;Offsetted from the top left of the Matrix&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 274,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Extract&quot;,
+            &quot;desc&quot;: &quot;Extracts a Matrix from one point to another, creating another Matrix.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;p1&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;p2&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 295,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;FlipHorizontally&quot;,
+            &quot;desc&quot;: &quot;lips the values in the Matrix on the x-axis.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 332,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;FlipVertically&quot;,
+            &quot;desc&quot;: &quot;lips the values in the Matrix on the y-axis.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 352,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Rotate90Clockwise&quot;,
+            &quot;desc&quot;: &quot;lips the values in the Matrix 90 degrees clockwise.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 368,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Rotate180&quot;,
+            &quot;desc&quot;: &quot;lips the values in the Matrix upside down.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 393,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Rotate90CounterClockwise&quot;,
+            &quot;desc&quot;: &quot;lips the values in the Matrix 90 degrees counter-clockwise.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 399,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Invert&quot;,
+            &quot;desc&quot;: &quot;nverts all booleans contained within the Matrix.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 405,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;FlipNeighbors&quot;,
+            &quot;desc&quot;: &quot;ill change all false values that are next to a true value into true.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 417,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Cull&quot;,
+            &quot;desc&quot;: &quot;Zooms in on areas that use a true value, useful for optimization.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Matrix&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 446,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;InsertConnector&quot;,
+            &quot;desc&quot;: &quot;Inserts a Connector&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;p1&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;p2&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 486,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;ShowConnectors&quot;,
+            &quot;desc&quot;: &quot;Change the values in the Matrix to that of the starting and ending connectors, will default to \&quot;S\&quot; and \&quot;E\&quot; respectively if no values for them are provided&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;StartChar&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                },
+                {
+                    &quot;name&quot;: &quot;EndChar&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 495,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetStartingConnectors&quot;,
+            &quot;desc&quot;: &quot;ets all starting connectors to one Vector2&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 512,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetEndingConnectors&quot;,
+            &quot;desc&quot;: &quot;ets all ending connectors to one Vector2&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;val&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;Vector2&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 525,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;GetFarthestConnectorIndex&quot;,
+            &quot;desc&quot;: &quot;Gets the Connector that has the highest magnitude.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [
+                {
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;number&quot;
+                }
+            ],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 541,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Border&quot;,
+            &quot;desc&quot;: &quot;ill surround the Matrix with a value&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;borderChar&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;any&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 561,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Wallify&quot;,
+            &quot;desc&quot;: &quot;ery niche but surrounds all Floor characters with a Wall character.&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 578,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;SetRandomChar&quot;,
+            &quot;desc&quot;: &quot;ets all values to a random character from the Charset&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 602,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Print&quot;,
+            &quot;desc&quot;: &quot;eatly prints the Matrix in the terminal, will only work if all values are strings or numbers&quot;,
+            &quot;params&quot;: [],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 617,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        },
+        {
+            &quot;name&quot;: &quot;Generate&quot;,
+            &quot;desc&quot;: &quot;hile this function may appear to be useful, DO NOT USE IN PRODUCTION. It takes a long time to load and causes lag! For that reason, it&#x27;s only meant to be used as a way to debug stuff.&quot;,
+            &quot;params&quot;: [
+                {
+                    &quot;name&quot;: &quot;BlueprintSelected&quot;,
+                    &quot;desc&quot;: &quot;&quot;,
+                    &quot;lua_type&quot;: &quot;ModuleScript&quot;
+                }
+            ],
+            &quot;returns&quot;: [],
+            &quot;function_type&quot;: &quot;method&quot;,
+            &quot;source&quot;: {
+                &quot;line&quot;: 624,
+                &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+            }
+        }
+    ],
+    &quot;properties&quot;: [],
+    &quot;types&quot;: [],
+    &quot;name&quot;: &quot;Matrix&quot;,
+    &quot;desc&quot;: &quot;A grid of values&quot;,
+    &quot;source&quot;: {
+        &quot;line&quot;: 4,
+        &quot;path&quot;: &quot;src/Shared/DagNabbit/Matrix/init.luau&quot;
+    }
+}</pre></details></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#functions" class="table-of-contents__link toc-highlight">Functions</a><ul><li><a href="#AddOn" class="table-of-contents__link toc-highlight">:AddOn</a></li><li><a href="#Border" class="table-of-contents__link toc-highlight">:Border</a></li><li><a href="#Cull" class="table-of-contents__link toc-highlight">:Cull</a></li><li><a href="#Extract" class="table-of-contents__link toc-highlight">:Extract</a></li><li><a href="#FlipHorizontally" class="table-of-contents__link toc-highlight">:FlipHorizontally</a></li><li><a href="#FlipNeighbors" class="table-of-contents__link toc-highlight">:FlipNeighbors</a></li><li><a href="#FlipVertically" class="table-of-contents__link toc-highlight">:FlipVertically</a></li><li><a href="#Generate" class="table-of-contents__link toc-highlight">:Generate</a></li><li><a href="#GetFarthestConnectorIndex" class="table-of-contents__link toc-highlight">:GetFarthestConnectorIndex</a></li><li><a href="#GetNumOfChars" class="table-of-contents__link toc-highlight">:GetNumOfChars</a></li><li><a href="#InsertConnector" class="table-of-contents__link toc-highlight">:InsertConnector</a></li><li><a href="#Invert" class="table-of-contents__link toc-highlight">:Invert</a></li><li><a href="#Mask" class="table-of-contents__link toc-highlight">:Mask</a></li><li><a href="#Overlay" class="table-of-contents__link toc-highlight">:Overlay</a></li><li><a href="#Print" class="table-of-contents__link toc-highlight">:Print</a></li><li><a href="#RectSet" class="table-of-contents__link toc-highlight">:RectSet</a></li><li><a href="#Rotate180" class="table-of-contents__link toc-highlight">:Rotate180</a></li><li><a href="#Rotate90Clockwise" class="table-of-contents__link toc-highlight">:Rotate90Clockwise</a></li><li><a href="#Rotate90CounterClockwise" class="table-of-contents__link toc-highlight">:Rotate90CounterClockwise</a></li><li><a href="#SetAll" class="table-of-contents__link toc-highlight">:SetAll</a></li><li><a href="#SetByChar" class="table-of-contents__link toc-highlight">:SetByChar</a></li><li><a href="#SetByObject" class="table-of-contents__link toc-highlight">:SetByObject</a></li><li><a href="#SetEndingConnectors" class="table-of-contents__link toc-highlight">:SetEndingConnectors</a></li><li><a href="#SetMultipleChars" class="table-of-contents__link toc-highlight">:SetMultipleChars</a></li><li><a href="#SetRandomBool" class="table-of-contents__link toc-highlight">:SetRandomBool</a></li><li><a href="#SetRandomChar" class="table-of-contents__link toc-highlight">:SetRandomChar</a></li><li><a href="#SetStartingConnectors" class="table-of-contents__link toc-highlight">:SetStartingConnectors</a></li><li><a href="#ShowConnectors" class="table-of-contents__link toc-highlight">:ShowConnectors</a></li><li><a href="#Wallify" class="table-of-contents__link toc-highlight">:Wallify</a></li><li><a href="#fromMatrix" class="table-of-contents__link toc-highlight">.fromMatrix</a></li><li><a href="#new" class="table-of-contents__link toc-highlight">.new</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 pehq. Built with Moonwave and Docusaurus.</div></div></div></footer></div>
+</body>
+</html>

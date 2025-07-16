@@ -1,5 +1,6 @@
 --Taken from DataBrain's woodgrain plugin
 --some modifications done by PehqDev
+--This module is useful for correcting woodgrain on parts that will be generated.
 local WoodGrain = {}
 
 local function SearchWoodenParts(search, tab)
@@ -92,7 +93,7 @@ end
 
 function WoodGrain.FixAllInWorkspace(threshold)
 	if not threshold then threshold = 0.75 end
-	WoodGrain.FixInInstance(workssspace, threshold)
+	WoodGrain.FixInInstance(workspace, threshold)
 end
 
 return WoodGrain

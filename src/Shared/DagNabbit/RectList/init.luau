@@ -207,13 +207,16 @@ end
 
 --look up "computational geometry rectangle subtraction algorithm"
 --Naming scheme is based on GCP https://en.wikipedia.org/wiki/General_Polygon_Clipper
-function RectList:Difference(r:Rect)
+function RectList:Difference(r:Rect, ExcludedValues:{string})
 	local AffectedRects = self:GetOverlapping(r) --Tables are anonymous, these are the direct values.
 	print(AffectedRects)
 	
 	local IndexesToRemove = {}
 	
 	for i, v in pairs(AffectedRects) do
+		if ExcludedValues ~= nil and table.find(ExcludedValues, v.Value) then
+			continue
+		end
 		local a:Rect = v.Rect
 		
 		if RectUtils.Covering(r, a) then
@@ -292,7 +295,7 @@ function RectList:GetRandomRectFromVal(val)
 		if v.Value == val then
 			table.insert(AllRectsWithVal, v)
 		end
-	end	
+	end
 	
 	if #AllRectsWithVal == 0 then
 		return 

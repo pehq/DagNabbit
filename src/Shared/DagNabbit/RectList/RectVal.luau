@@ -25,7 +25,7 @@ function RectVal:SetValue(val)
     self.Value = val
 end
 
-function RectVal:GetMidpoint()
+function RectVal:GetMidpoint():Vector2
     local Mid = Vector2.new(self.Rect.Min.X + self.Rect.Width/2, self.Rect.Min.Y + self.Rect.Height/2)
     return Mid
 end

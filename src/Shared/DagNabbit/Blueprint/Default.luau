@@ -32,7 +32,6 @@ function Blueprint.Floor(Pos, Scale)
 	return Part
 end
 
-
 local GenFuncs = {
 	Wall = Blueprint.Floor,
 	Floor = Blueprint.Wall,

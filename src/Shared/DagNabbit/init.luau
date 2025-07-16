@@ -24,7 +24,7 @@
 
 local DagNabbit = {}
 --
-for i, v in pairs(script:GetChildren()) do
+for _, v in pairs(script:GetChildren()) do
 	if v:IsA("ModuleScript") then
 		local suc, res = pcall(function()
 			DagNabbit[v.Name] = require(v)

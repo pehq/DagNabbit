@@ -67,6 +67,13 @@ local Direction = {
 	Vector2.new(-1,-1), --NorthWest
 }
 
+local SoftDir = {
+	Vector2.new(-1, 0), --North
+	Vector2.new( 0, 1), --East
+	Vector2.new( 1, 0), --South
+	Vector2.new( 0,-1), --West
+}
+
 local function BuildMatrix(dims:Vector2)
 	local matrixVal = {}
 	

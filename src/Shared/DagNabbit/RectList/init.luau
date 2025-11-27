@@ -152,7 +152,6 @@ function RectList.fromMatrix(Matrix)
 					ValsChecked[(fillY - 1) * Rows + fillX] = true
 				end
 			end
-			
 
 			--print(x, y, Max_X, Max_Y, val)
 			self:Insert(Rect.new(x - 1, y - 1, Max_X, Max_Y), val)
@@ -286,6 +285,18 @@ function RectList:Difference(r:Rect, ExcludedValues:{string})
 			table.remove(i)
 		end
 	end
+end
+
+function RectList:RemoveByValue(val)
+	local newRectList = {}
+	
+	for i, v in pairs(self.List) do
+		if v.Value ~= val then
+			table.insert(newRectList, v)
+		end
+	end
+	
+	self.List = newRectList
 end
 
 function RectList:GetRandomRectFromVal(val)

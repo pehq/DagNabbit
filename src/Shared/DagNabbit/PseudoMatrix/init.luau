@@ -1,6 +1,10 @@
 local CollectionService = game:GetService("CollectionService")
 --Pehq
---i = (y - 1) * Width + (x - 1) + 1  --> This is the main principle this module runs on. Try to simplify it as much as possible.
+--Due to Lua's arrays starting at 1, this will pay respect to that.
+--i = (y - 1) * Width + (x - 1) + 1  --> This formula is the main principle this module runs on. Try to simplify it as much as possible.
+--i = (z - 1) * (Width * Height) + (y - 1) * Width + (x - 1) + 1 --> This is what a 3d psudo array would be expressed.
+
+--For now you shouldn't worry about this module even though the alternative is very costly.
 
 local Dag = script:FindFirstAncestor("DagNabbit")
 
@@ -100,7 +104,7 @@ function Matrix:SetRandomBool()
 end
 
 function Matrix:Clone()
-    clone = setmetatable({}, getmetatable(self))
+    local clone = setmetatable({}, getmetatable(self))
     clone.Dimensions = self.Dimensions
     clone.Value = DeepCopy(self.Value)
     clone.Connectors = DeepCopy(self.Connectors)
@@ -298,7 +302,7 @@ function Matrix:Cull()
     return self:Extract(Min_X, Min_Y, Max_X, Max_Y)
 end
 
-function Matrix:SetOnStartingConnectors(val)
+function Matrix:SetFromStartingConnectors(val:Vector2)
     if not val then
         return
     end
@@ -306,9 +310,7 @@ function Matrix:SetOnStartingConnectors(val)
     for i = 1, #self.Connectors do
 		local CurConnector = self.Connectors[i]
 		
-        local x, y = CurConnector[1].X, CurConnector[1].Y
-        
-		self.Value[(y-1) * self.Dimensions.X + x] = val
+		self.Value[CurConnector[1].Y][CurConnector[1].X] = val
 	end
 end
 

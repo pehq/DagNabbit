@@ -20,7 +20,7 @@ function MinesBlueprint.Wall(pos, size)
 	Part.Size = Vector3.new(size.X, 2, size.Y)
 	Part.CFrame = CFrame.new(pos.X, Part.Size.Y / 2, pos.Y)
 	Part.Name = `{pos.X} {pos.Y}`
-
+	
 	return Part
 end
 

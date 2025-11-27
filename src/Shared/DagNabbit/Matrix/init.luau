@@ -106,6 +106,7 @@ function Matrix.new(...)
 	self.Dimensions = args
 	self.Value = BuildMatrix(args)
 	self.GridScale = Vector2.new(5,5)  --x, y
+	self.Origin = Vector2.one
 	self.Connectors = {}
 	
 	return self
@@ -127,6 +128,7 @@ function Matrix.fromMatrix(matrixVal)
 	
 	return self
 end
+
 
 --[=[
 	Set all the values in the Matrix to one value. Useful for setting up a Matrix.
@@ -621,10 +623,21 @@ function Matrix:SetRandomChar()
 end
 
 ---Neatly prints the Matrix in the terminal, will only work if all values are strings or numbers
-function Matrix:Print()
+function Matrix:QuickPrint(seperate)
+	local sep = seperate == true and " " or ""
+	
 	for i = 1, #self.Value do
-		print(table.concat(self.Value[i]))
+		print(table.concat(self.Value[i], sep))
 	end
+end
+
+--Neatly prints the Matrix in the terminal, will work on all values.
+function Matrix:Print(seperate)
+	self:SetByChar(false, "false")
+	self:SetByChar(true, "true")
+	self:SetByChar(nil, "") --I have not tested this
+	
+	self:QuickPrint(seperate)
 end
 
 ---While this function may appear to be useful, DO NOT USE IN PRODUCTION. It takes a long time to load and causes lag! For that reason, it's only meant to be used as a way to debug stuff.

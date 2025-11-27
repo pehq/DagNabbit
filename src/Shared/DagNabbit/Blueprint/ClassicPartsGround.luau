@@ -53,5 +53,24 @@ local GenFuncs = {
 	Brick = Blueprint.Brick,
 }
 
+function Blueprint.GenerateRectVal(self:{Rect:Rect, Value:any?})
+	local Val = self.Value
+	local CharVal = CharSet.CharValues[Val]
+	
+	if not CharVal then
+		return
+	end
+	
+	local pos = self:GetMidpoint()
+	local scale = Vector2.new(self.Rect.Width, self.Rect.Height)
+	
+	local Part = nil
+	
+	if GenFuncs[CharVal] ~= nil then
+		Part = GenFuncs[CharVal](pos, scale)
+	end
+	
+	return Part
+end
 
 return Blueprint
